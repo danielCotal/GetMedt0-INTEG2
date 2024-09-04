@@ -8,4 +8,4 @@ function CitasP() {
   );
 }
 
-export default AppointmentsPage;
+export default CitasP;
