@@ -3,8 +3,7 @@ import React from 'react';
 function UsersPage() {
   return (
     <div>
-      <h1>Users Page</h1>
-      <p>This is where you can manage your users.</p>
+      <h1>Usuarios</h1>
     </div>
   );
 }

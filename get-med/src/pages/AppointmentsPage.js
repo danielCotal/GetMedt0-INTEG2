@@ -1,11 +1,9 @@
-// src/pages/AppointmentsPage.js
 import React from 'react';
 
-function AppointmentsPage() {
+function CitasP() {
   return (
     <div>
-      <h1>Appointments Page</h1>
-      <p>This is where you can manage appointments.</p>
+      <h1>Citas</h1>
     </div>
   );
 }
