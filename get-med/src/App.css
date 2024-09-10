@@ -1,5 +1,8 @@
 .App {
-  text-align: center;
+/*  text-align: center;*/
+  display: flex;
+  flex-direction: column;
+
 }
 
 .App-logo {
@@ -35,4 +38,34 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Estilo para la barra de navegación */
+.navbar {
+  width: 200px;
+  height: 100vh; /* Toda la altura de la ventana */
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar ul li {
+  margin-bottom: 20px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Estilo para el contenido principal */
+.content {
+  flex: 1;
+  padding: 20px;
 }

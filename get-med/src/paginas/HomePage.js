@@ -2,7 +2,7 @@
 import React from 'react';
 
 function HomePage() {
-  return <h1>Welcome to the Home Page</h1>;
+  return <h1>Página de Inicio</h1>;
 }
 
 export default HomePage;

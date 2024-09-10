@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import UsersPage from './pages/UsersPage';
-import AppointmentsPage from './pages/AppointmentsPage';
-import Navbar from './components/Navbar';
+import HomePage from './paginas/HomePage';
+import UsersPage from './paginas/UsersPage';
+import AppointmentsPage from './paginas/AppointmentsPage';
+import Navbar from './componentes/Navbar';
+import './App.css'; // Corregida esta línea
 
 function App() {
   return (

@@ -3,7 +3,7 @@ import React from 'react';
 function CitasP() {
   return (
     <div>
-      <h1>Citas</h1>
+      <h1>Pagina de citas</h1>
     </div>
   );
 }
