@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 
 const Formulario = () => {
 	const [inputNombre, cambiarInputNombre] = useState('');
-	const [inputCorreo, cambiarInputCorreo] = useState('');
 	const [inputFecha, cambiarInputFecha] = useState('');
 	const [inputHora, cambiarInputHora] = useState('');
 	const [inputMensaje, cambiarInputMensaje] = useState('');
+	const [inputEspecialidad, cambiarInputEspecialidad] = useState('');
+	const especialidades = ['Cardiología', 'Pediatría', 'Neurología', 'Dermatología'];
 
 	// validar y enviar formulario
 	const handleSubmit = (e) => {
@@ -18,8 +19,8 @@ const Formulario = () => {
 		cambiarInputNombre(e.target.value);
 	}
 	
-	const handleInputCorreo = (e) => {
-		cambiarInputCorreo(e.target.value);
+	const handleInputEspecialidad = (e) => {
+		cambiarInputEspecialidad(e.target.value);
 	}
 
 	const handleInputFecha = (e) => {
@@ -45,7 +46,7 @@ const Formulario = () => {
 		<>
 			<form action="" onSubmit={handleSubmit} className="formulario">
 				<div>
-					<label htmlFor="nombre">Nombre</label>
+					<label htmlFor="nombre">¿Quién asistirá a la visita?</label>
 					<input
 						type="text"
 						name="nombre"
@@ -57,16 +58,20 @@ const Formulario = () => {
 				</div>
 
 				<div>
-					<label htmlFor="correo">Correo</label>
-					<input
-						type="text"
-						name="correo"
-						placeholder="Correo"
-						id="correo"
-						value={inputCorreo}
-						onChange={handleInputCorreo}
-					/>
-				</div>
+          			<label htmlFor="especialidad">Especialidad</label>
+          			<select
+            			id="especialidad"
+            			value={inputEspecialidad}
+            			onChange={handleInputEspecialidad}
+          			>
+            			<option value="">Selecciona una especialidad</option>
+            			{especialidades.map((especialidad) => (
+              				<option key={especialidad} value={especialidad}>
+                				{especialidad}
+              				</option>
+            			))}
+          			</select>
+        		</div>
 
 				<div>
 				    <label htmlFor="fecha">Fecha Deseada</label>
@@ -106,7 +111,7 @@ const Formulario = () => {
 					/>
 				</div>
 
-				<button type="submit">Enviar</button>
+				<button type="submit">Ver doctores y horas disponibles</button>
 			</form>
 		</>
 	);
