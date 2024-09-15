@@ -2,9 +2,10 @@ import React from 'react';
 import { useState } from 'react'; 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './Calendario.css'
+import './Componentes/Calendario.css'
 import logo from './logo.svg';
 import './App.css';
+import FormRegistro from './Componentes/FormRegisEstatic.js';
 
 function App() {
   const [date, setDate]= useState(new Date());
@@ -15,6 +16,8 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Registro de Usuarios</h1>
+      <FormRegistro />
       <header className="App-header">
         <h1>Libreria de calendario adecuada "React Calendar"</h1>
         <Calendar onChange={handleDateChange} value={date}/>
