@@ -1,0 +1,31 @@
+.FormRegistro {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #5d8aeb;
+    background-color: #5d8aeb;
+    border-radius: 10px;
+  }
+  
+  .FormRegistro div {
+    margin-bottom: 15px;
+  }
+  
+  .FormRegistro label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .FormRegistro input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .FormRegistro button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2648e2;
+    color: white;
+    border-radius: 5px;
+  }

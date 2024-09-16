@@ -16,12 +16,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Registro de Usuarios</h1>
-      <FormRegistro />
       <header className="App-header">
         <h1>Libreria de calendario adecuada "React Calendar"</h1>
         <Calendar onChange={handleDateChange} value={date}/>
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>Registro de Usuarios</h1>
+        <FormRegistro />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

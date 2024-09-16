@@ -4,9 +4,7 @@ import './FormRegisEstatic.css';
 
 const FormRegistro = () => {
   const [formData, setFormData] = useState({
-    Usuario: '',
-    Correo: '',
-    Contra: ''
+    Usuario: '', Correo: '', Contra: ''
   });
 
   const handleChange = (e) => {
