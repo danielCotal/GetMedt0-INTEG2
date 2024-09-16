@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación de Cita</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-left">
+            <a href="#" class="menu">Inicio</a>
+            <a href="#" class="menu">¿Quiénes Somos?</a>
+            <a href="#" class="menu">Contacto</a>
+        </div>
+        <div class="user-info">
+            <span>Nombre Usuario</span>
+            <div style="width: 20px; height: 20px; background-color: black; border-radius: 50%;"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Creación de Cita</h1>
+        <div class="box">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label>La cita está dirigida a:</label><br>
+                    <input type="radio" id="yo" name="destinatario" value="yo">
+                    <label for="yo">Yo (El Usuario)</label><br>
+                    <input type="radio" id="otro" name="destinatario" value="otro">
+                    <label for="otro">Otro</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="servicio">Seleccione el servicio que desea:</label><br>
+                    <select id="servicio" class="custom-select">
+                        <option value="servicio1">Servicio 1</option>
+                        <option value="servicio2">Servicio 2</option>
+                        <option value="servicio3">Servicio 3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="enfoque">Seleccione el enfoque de la cita:</label><br>
+                    <select id="enfoque" class="custom-select">
+                        <option value="enfoque1">Enfoque 1</option>
+                        <option value="enfoque2">Enfoque 2</option>
+                        <option value="enfoque3">Enfoque 3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Fecha para lista de espera:</label><br>
+                    <input type="text" id="fecha" name="fecha" class="text-input" placeholder="DD/MM/AA">
+                </div>
+
+                <div class="form-group">
+                    <label for="doctores">Doctores Disponibles:</label><br>
+                    <select id="doctores" class="custom-select">
+                        <option value="doctor1">Doctor 1</option>
+                        <option value="doctor2">Doctor 2</option>
+                        <option value="doctor3">Doctor 3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="button2">Enviar Solicitud</button>
+                    <button type="button" class="button2">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
