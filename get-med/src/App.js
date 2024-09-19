@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './paginas/HomePage';
-import UsersPage from './paginas/UsersPage';
-import AppointmentsPage from './paginas/AppointmentsPage';
+import Inicio from './paginas/Inicio';
+import Usuarios from './paginas/Usuarios';
+import Citas from './paginas/Citas';
 import Navbar from './componentes/Navbar';
-import './App.css'; // Corregida esta línea
+import './styles/App.css'; // Asegúrate de que esté correcto
 
 function App() {
   return (
@@ -12,9 +12,9 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/appointments" element={<AppointmentsPage />} />
+          <Route path="/" element={<Inicio />} />
+          <Route path="/usuarios" element={<Usuarios />} />
+          <Route path="/citas" element={<Citas />} />
         </Routes>
       </div>
     </Router>
