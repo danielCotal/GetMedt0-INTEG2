@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react'; 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './Componentes/Calendario.css'
+import './Componentes/Calendario.css';
 import logo from './logo.svg';
 import './App.css';
 import FormRegistro from './Componentes/FormRegisEstatic.js';
