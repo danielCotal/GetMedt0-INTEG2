@@ -28,7 +28,7 @@ db.connect((err) => {
 
 // Ruta para obtener las especialidades
 app.get('/especialidad', (req, res) => {
-    const query = 'SELECT nombre FROM especialidad'; 
+    const query = 'SELECT Nom_Espe FROM especialidad'; 
     db.query(query, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener especialidades' });
