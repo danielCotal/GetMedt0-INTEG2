@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const Formulario = () => {
 	const [inputNombre, cambiarInputNombre] = useState('');
@@ -6,7 +6,18 @@ const Formulario = () => {
 	const [inputHora, cambiarInputHora] = useState('');
 	const [inputMensaje, cambiarInputMensaje] = useState('');
 	const [inputEspecialidad, cambiarInputEspecialidad] = useState('');
-	const especialidades = ['Cardiología', 'Pediatría', 'Neurología', 'Dermatología'];
+	const [especialidades, setEspecialidades] = useState([]);
+
+	useEffect(() => {
+		fetch('http://localhost:3001/especialidades') // Asegúrate de que la URL sea correcta
+		  .then((response) => response.json())
+		  .then((data) => {
+			// Extraer el nombre de la especialidad de cada objeto
+			const especialidadesLista = data.map((especialidad) => especialidad.nombre);
+			setEspecialidades(especialidadesLista);
+		  })
+		  .catch((error) => console.error('Error al obtener especialidades:', error));
+	  }, []);
 
 	// validar y enviar formulario
 	const handleSubmit = (e) => {
@@ -62,7 +73,7 @@ const Formulario = () => {
           			<select
             			id="especialidad"
             			value={inputEspecialidad}
-            			onChange={handleInputEspecialidad}
+            			onChange={(e) => cambiarInputEspecialidad(e.target.value)}
           			>
             			<option value="">Selecciona una especialidad</option>
             			{especialidades.map((especialidad) => (
