@@ -7,17 +7,36 @@ const Formulario = () => {
 	const [inputMensaje, cambiarInputMensaje] = useState('');
 	const [inputEspecialidad, cambiarInputEspecialidad] = useState('');
 	const [especialidades, setEspecialidades] = useState([]);
+	const [doctores, setDoctores] = useState([]);
+	const [inputDoctor, setInputDoctor] = useState('');
+	const [doctoresDisabled, setDoctoresDisabled] = useState(true);
 
 	useEffect(() => {
 		fetch('http://localhost:3001/especialidad') 
 		  .then((response) => response.json())
 		  .then((data) => {
 			// Extraer el nombre de la especialidad de cada objeto
-			const especialidadesLista = data.map((especialidad) => especialidad.nombre);
+			const especialidadesLista = data.map((especialidad) => especialidad.Nom_Espe);
 			setEspecialidades(especialidadesLista);
 		  })
 		  .catch((error) => console.error('Error al obtener especialidades:', error));
 	  }, []);
+
+	  useEffect(() => {
+		if (inputEspecialidad) {
+			fetch(`http://localhost:3001/doctores?especialidad=${inputEspecialidad}`)
+			  .then((response) => response.json())
+			  .then((data) => {
+				setDoctores(data);
+				setDoctoresDisabled(false); // Desbloquea el select de doctores
+			  })
+			  .catch((error) => console.error('Error al obtener doctores:', error));
+		} else {
+			setDoctoresDisabled(true); // Bloquea si no hay especialidad seleccionada
+			setDoctores([]);
+		}
+	}, [inputEspecialidad]);
+
 
 	// validar y enviar formulario
 	const handleSubmit = (e) => {
@@ -38,7 +57,7 @@ const Formulario = () => {
         const selectedDate = new Date(e.target.value);
         const dayOfWeek = selectedDate.getDay(); // 0: Domingo, 1: Lunes, ..., 6: Sábado
 
-        if (dayOfWeek === 0 || dayOfWeek === 6) {
+        if (dayOfWeek === 5 || dayOfWeek === 6) {
             alert('Por favor, selecciona un día de lunes a viernes.');
         } else {
             cambiarInputFecha(e.target.value);
@@ -51,6 +70,10 @@ const Formulario = () => {
 
 	const handleInputMensaje = (e) => {
 		cambiarInputMensaje(e.target.value);
+	}
+
+	const handleCancelarCita = () => {
+		alert('La cita ha sido cancelada.');
 	}
 
 	return (
@@ -83,6 +106,23 @@ const Formulario = () => {
             			))}
           			</select>
         		</div>
+
+				<div>
+					<label htmlFor="doctor">Doctor</label>
+					<select
+						id="doctor"
+						value={inputDoctor}
+						disabled={doctoresDisabled}
+						onChange={(e) => setInputDoctor(e.target.value)}
+					>
+						<option value="">Selecciona un doctor</option>
+						{doctores.map((doctor) => (
+							<option key={doctor.Nom_medic} value={doctor.Nom_medic}>
+								{doctor.Nom_medic}
+							</option>
+						))}
+					</select>
+				</div>
 
 				<div>
 				    <label htmlFor="fecha">Fecha Deseada</label>
@@ -122,7 +162,14 @@ const Formulario = () => {
 					/>
 				</div>
 
-				<button type="submit">Ver doctores y horas disponibles</button>
+				<button type="submit">Solicitar Hora Médica</button>
+				<button
+					type="button"
+					onClick={handleCancelarCita}
+					className="btn-cancelar"
+				>
+					Cancelar Cita
+				</button>
 			</form>
 		</>
 	);

@@ -37,6 +37,22 @@ app.get('/especialidad', (req, res) => {
     });
 });
 
+app.get('/doctores', (req, res) => {
+    const especialidad = req.query.especialidad;
+    const query = `
+        SELECT m.Nom_medic 
+        FROM medico m
+        INNER JOIN especialidad e ON e.ID_Medic = m.ID_Medic
+        WHERE e.Nom_Espe = ?`; 
+
+    db.query(query, [especialidad], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener doctores' });
+        }
+        res.json(result);
+    });
+});
+
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
 });
