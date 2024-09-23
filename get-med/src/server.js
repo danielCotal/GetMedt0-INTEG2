@@ -55,6 +55,41 @@ app.post('/api/registro', (req, res) => {
   });
 });
 
+// Eliminar usuario 
+app.delete('/api/usuario/:id', (req, res) => {
+  const userId = req.params.id;
+  const query = 'DELETE FROM usuario WHERE ID_User = ?';
+
+  connection.query(query, [userId], (err, result) => {
+    if (err) {
+      console.error('Error eliminando el usuario:', err);
+      return res.status(500).send('Error eliminando el usuario');
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Usuario no encontrado');
+    }
+    res.send('Usuario eliminado correctamente');
+  });
+});
+
+// Actualizar usuario 
+app.put('/api/usuario/:id', (req, res) => {
+  const userId = req.params.id;
+  const { rut, Contraseña } = req.body;
+  const query = 'UPDATE usuario SET rut = ?, Contraseña = ? WHERE ID_User = ?';
+  
+  connection.query(query, [rut, Contraseña, userId], (err, result) => {
+    if (err) {
+      console.error('Error actualizando el usuario:', err);
+      return res.status(500).send('Error actualizando el usuario');
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Usuario no encontrado');
+    }
+    res.send('Usuario actualizado correctamente');
+  });
+});
+
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
