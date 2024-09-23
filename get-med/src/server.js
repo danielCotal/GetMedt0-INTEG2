@@ -13,7 +13,7 @@ app.use(cors());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'contraseña',
+    password: '',
     database: 'getmed'
 });
 
@@ -27,8 +27,8 @@ db.connect((err) => {
 });
 
 // Ruta para obtener las especialidades
-app.get('/especialidades', (req, res) => {
-    const query = 'SELECT nombre FROM especialidades'; // Cambia 'especialidades' y 'nombre' a los nombres correctos de tu tabla y columna
+app.get('/especialidad', (req, res) => {
+    const query = 'SELECT nombre FROM especialidad'; 
     db.query(query, (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Error al obtener especialidades' });

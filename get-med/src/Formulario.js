@@ -9,7 +9,7 @@ const Formulario = () => {
 	const [especialidades, setEspecialidades] = useState([]);
 
 	useEffect(() => {
-		fetch('http://localhost:3001/especialidades') // Asegúrate de que la URL sea correcta
+		fetch('http://localhost:3001/especialidad') 
 		  .then((response) => response.json())
 		  .then((data) => {
 			// Extraer el nombre de la especialidad de cada objeto
