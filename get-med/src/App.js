@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react'; 
 import Calendario from './Componentes/Calendario.js';
-import 'react-calendar/dist/Calendar.css';
 import './App.css';
 import './Componentes/Botones.css';
 import FormRegistro from './Componentes/FormRegisEstatic.js';
