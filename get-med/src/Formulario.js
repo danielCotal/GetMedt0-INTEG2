@@ -1,178 +1,185 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
+// Componente del Formulario
 const Formulario = () => {
-	const [inputNombre, cambiarInputNombre] = useState('');
-	const [inputFecha, cambiarInputFecha] = useState('');
-	const [inputHora, cambiarInputHora] = useState('');
-	const [inputMensaje, cambiarInputMensaje] = useState('');
-	const [inputEspecialidad, cambiarInputEspecialidad] = useState('');
-	const [especialidades, setEspecialidades] = useState([]);
-	const [doctores, setDoctores] = useState([]);
-	const [inputDoctor, setInputDoctor] = useState('');
-	const [doctoresDisabled, setDoctoresDisabled] = useState(true);
+  const [inputNombre, cambiarInputNombre] = useState('');
+  const [inputFecha, cambiarInputFecha] = useState('');
+  const [inputEspecialidad, cambiarInputEspecialidad] = useState('');
+  const [especialidades, setEspecialidades] = useState([]);
+  const [doctores, setDoctores] = useState([]);
+  const [inputDoctor, setInputDoctor] = useState('');
+  const [doctoresDisabled, setDoctoresDisabled] = useState(true);
 
-	useEffect(() => {
-		fetch('http://localhost:3001/especialidad') 
-		  .then((response) => response.json())
-		  .then((data) => {
-			// Extraer el nombre de la especialidad de cada objeto
-			const especialidadesLista = data.map((especialidad) => especialidad.Nom_Espe);
-			setEspecialidades(especialidadesLista);
-		  })
-		  .catch((error) => console.error('Error al obtener especialidades:', error));
-	  }, []);
+  const navigate = useNavigate(); // Hook para navegar a otra página
 
-	  useEffect(() => {
-		if (inputEspecialidad) {
-			fetch(`http://localhost:3001/doctores?especialidad=${inputEspecialidad}`)
-			  .then((response) => response.json())
-			  .then((data) => {
-				setDoctores(data);
-				setDoctoresDisabled(false); // Desbloquea el select de doctores
-			  })
-			  .catch((error) => console.error('Error al obtener doctores:', error));
-		} else {
-			setDoctoresDisabled(true); // Bloquea si no hay especialidad seleccionada
-			setDoctores([]);
-		}
-	}, [inputEspecialidad]);
+  // Fetch de especialidades desde el backend
+  useEffect(() => {
+    fetch('http://localhost:3001/especialidad')
+      .then((response) => response.json())
+      .then((data) => {
+        const especialidadesLista = data.map((especialidad) => especialidad.Nom_Espe);
+        setEspecialidades(especialidadesLista);
+      })
+      .catch((error) => console.error('Error al obtener especialidades:', error));
+  }, []);
 
+  // Fetch de doctores basado en la especialidad seleccionada
+  useEffect(() => {
+    if (inputEspecialidad) {
+      fetch(`http://localhost:3001/doctores?especialidad=${inputEspecialidad}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setDoctores(data);
+          setDoctoresDisabled(false);
+        })
+        .catch((error) => console.error('Error al obtener doctores:', error));
+    } else {
+      setDoctoresDisabled(true);
+      setDoctores([]);
+    }
+  }, [inputEspecialidad]);
 
-	// validar y enviar formulario
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log('Formulario Enviado!');
-	}
+  // Manejo del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Redirigir a la página de confirmación con los datos del formulario
+    navigate('/confirmacion', {
+      state: {
+        nombre: inputNombre,
+        fecha: inputFecha,
+        especialidad: inputEspecialidad,
+        doctor: inputDoctor,
+      },
+    });
+  };
 
-	// cambiar el estado del inputNombre
-	const handleInputNombre = (e) => {
-		cambiarInputNombre(e.target.value);
-	}
-	
-	const handleInputEspecialidad = (e) => {
-		cambiarInputEspecialidad(e.target.value);
-	}
+  return (
+    <form onSubmit={handleSubmit} className="formulario">
+      <div>
+        <label htmlFor="nombre">¿Quién asistirá a la visita?</label>
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          id="nombre"
+          value={inputNombre}
+          onChange={(e) => cambiarInputNombre(e.target.value)}
+        />
+      </div>
 
-	const handleInputFecha = (e) => {
-        const selectedDate = new Date(e.target.value);
-        const dayOfWeek = selectedDate.getDay(); // 0: Domingo, 1: Lunes, ..., 6: Sábado
+      <div>
+        <label htmlFor="especialidad">Especialidad</label>
+        <select
+          id="especialidad"
+          value={inputEspecialidad}
+          onChange={(e) => cambiarInputEspecialidad(e.target.value)}
+        >
+          <option value="">Selecciona una especialidad</option>
+          {especialidades.map((especialidad) => (
+            <option key={especialidad} value={especialidad}>
+              {especialidad}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        if (dayOfWeek === 5 || dayOfWeek === 6) {
-            alert('Por favor, selecciona un día de lunes a viernes.');
-        } else {
-            cambiarInputFecha(e.target.value);
-        }
-	}
+      <div>
+        <label htmlFor="doctor">Doctor</label>
+        <select
+          id="doctor"
+          value={inputDoctor}
+          disabled={doctoresDisabled}
+          onChange={(e) => setInputDoctor(e.target.value)}
+        >
+          <option value="">Selecciona un doctor</option>
+          {doctores.map((doctor) => (
+            <option key={doctor.Nom_medic} value={doctor.Nom_medic}>
+              {doctor.Nom_medic}
+            </option>
+          ))}
+        </select>
+      </div>
 
-	const handleInputHora = (e) => {
-		cambiarInputHora(e.target.value);
-	}
+      <div>
+        <label htmlFor="fecha">Fecha y hora deseada</label>
+        <input
+          type="datetime-local"
+          name="fecha"
+          id="fecha"
+          value={inputFecha}
+          onChange={(e) => cambiarInputFecha(e.target.value)}
+        />
+      </div>
 
-	const handleInputMensaje = (e) => {
-		cambiarInputMensaje(e.target.value);
-	}
+      <button type="submit">Solicitar Hora Médica</button>
+    </form>
+  );
+};
 
-	const handleCancelarCita = () => {
-		alert('La cita ha sido cancelada.');
-	}
+// Componente de Confirmación
+const Confirmacion = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-	return (
-		<>
-			<form action="" onSubmit={handleSubmit} className="formulario">
-				<div>
-					<label htmlFor="nombre">¿Quién asistirá a la visita?</label>
-					<input
-						type="text"
-						name="nombre"
-						placeholder="Nombre"
-						id="nombre"
-						value={inputNombre}
-						onChange={handleInputNombre}
-					/>
-				</div>
+  const { nombre, fecha, especialidad, doctor} = location.state || {};
 
-				<div>
-          			<label htmlFor="especialidad">Especialidad</label>
-          			<select
-            			id="especialidad"
-            			value={inputEspecialidad}
-            			onChange={(e) => cambiarInputEspecialidad(e.target.value)}
-          			>
-            			<option value="">Selecciona una especialidad</option>
-            			{especialidades.map((especialidad) => (
-              				<option key={especialidad} value={especialidad}>
-                				{especialidad}
-              				</option>
-            			))}
-          			</select>
-        		</div>
+  const handleConfirmar = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/reserva', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ID_User: 1,
+          ID_Horario: 3, 
+          FechaCreacion: new Date().toISOString(), // Fecha actual
+        }),
+      });
 
-				<div>
-					<label htmlFor="doctor">Doctor</label>
-					<select
-						id="doctor"
-						value={inputDoctor}
-						disabled={doctoresDisabled}
-						onChange={(e) => setInputDoctor(e.target.value)}
-					>
-						<option value="">Selecciona un doctor</option>
-						{doctores.map((doctor) => (
-							<option key={doctor.Nom_medic} value={doctor.Nom_medic}>
-								{doctor.Nom_medic}
-							</option>
-						))}
-					</select>
-				</div>
+      if (!response.ok) {
+        throw new Error('Error al enviar la reserva');
+      }
 
-				<div>
-				    <label htmlFor="fecha">Fecha Deseada</label>
-					<input
-						type="date"
-						name="fecha"
-						id="fecha"
-						value={inputFecha}
-						onChange={handleInputFecha}
-					/>
-				</div>
+      const result = await response.json();
+      alert(`Reserva confirmada con ID: ${result.ID_Reserva}`);
+      navigate('/'); // Redirige al formulario principal tras confirmar
+    } catch (error) {
+      console.error(error);
+      alert('No se pudo confirmar la reserva. Inténtalo nuevamente.');
+    }
+  };
 
-				<div>
-				    <label htmlFor="hora">Hora Deseada (9 am - 17:30 pm) </label>
-					<input
-						type="time"
-						name="hora"
-						step="1800"
-						min="09:00"
-						max="17:30"
-						id="hora"
-						value={inputHora}
-						onChange={handleInputHora}
-					/>
-				</div>
+  const handleCancelar = () => {
+    if (window.confirm('¿Estás seguro de que deseas cancelar la cita?')) {
+      navigate('/'); // Redirige al formulario principal tras cancelar
+    }
+  };
 
-				<div>
-				    <label htmlFor="mensaje">Razón o motivo de la visita </label>
-					<textarea
-						type="text"
-						name="mensaje"
-						id="mensaje"
-						className='input-grande'
-						maxLength={500}
-						value={inputMensaje}
-						onChange={handleInputMensaje}
-					/>
-				</div>
+  return (
+    <div>
+      <h2>Confirmación de Cita</h2>
+      <p><strong>Nombre:</strong> {nombre}</p>
+      <p><strong>Fecha:</strong> {fecha}</p>
+      <p><strong>Especialidad:</strong> {especialidad}</p>
+      <p><strong>Doctor:</strong> {doctor}</p>
+      <button onClick={handleConfirmar}>Confirmar y Enviar</button>
+      <button onClick={handleCancelar} style={{ marginLeft: '10px' }}>Cancelar Cita</button>
+    </div>
+  );
+};
 
-				<button type="submit">Solicitar Hora Médica</button>
-				<button
-					type="button"
-					onClick={handleCancelarCita}
-					className="btn-cancelar"
-				>
-					Cancelar Cita
-				</button>
-			</form>
-		</>
-	);
-}
- 
-export default Formulario;
+// Configuración del Router
+const MainApp = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Formulario />} />
+        <Route path="/confirmacion" element={<Confirmacion />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default MainApp;
