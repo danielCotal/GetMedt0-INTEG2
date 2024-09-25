@@ -46,11 +46,9 @@ const Formulario = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validación de campos obligatorios
-    if (!inputNombre || !inputFecha || !inputEspecialidad || !inputDoctor || !inputMotivo) {
-      alert('Por favor, completa todos los campos.');
-      return;
-  }
+    if (!validarFechaHora(inputFecha)) {
+      return; // Si la validación falla, no se envía el formulario
+    }
 
     // Redirigir a la página de confirmación con los datos del formulario
     navigate('/confirmacion', {
@@ -59,8 +57,36 @@ const Formulario = () => {
         fecha: inputFecha,
         especialidad: inputEspecialidad,
         doctor: inputDoctor,
+        motivo: inputMotivo
       },
     });
+  };
+
+  const validarFechaHora = (fecha) => {
+    const selectedDate = new Date(fecha);
+    const dayOfWeek = selectedDate.getDay();
+    const hours = selectedDate.getHours();
+    const minutes = selectedDate.getMinutes();
+  
+    // Valida que sea un día de lunes a viernes
+    if (dayOfWeek < 1 || dayOfWeek > 5) {
+      alert('Por favor, selecciona un día de lunes a viernes.');
+      return false;
+    }
+  
+    // Valida que la hora esté dentro del rango de 09:00 a 17:30
+    if (hours < 9 || (hours === 17 && minutes > 30) || hours > 17) {
+      alert('Por favor, selecciona una hora entre las 09:00 y las 17:30.');
+      return false;
+    }
+  
+    // Valida que los minutos sean 00 o 30
+    if (minutes !== 0 && minutes !== 30) {
+      alert('Por favor, selecciona una hora en intervalos de 30 minutos.');
+      return false;
+    }
+  
+    return true;
   };
 
   return (
@@ -74,6 +100,7 @@ const Formulario = () => {
           id="nombre"
           value={inputNombre}
           onChange={(e) => cambiarInputNombre(e.target.value)}
+          required
         />
       </div>
 
@@ -83,6 +110,7 @@ const Formulario = () => {
           id="especialidad"
           value={inputEspecialidad}
           onChange={(e) => cambiarInputEspecialidad(e.target.value)}
+          required
         >
           <option value="">Selecciona una especialidad</option>
           {especialidades.map((especialidad) => (
@@ -100,6 +128,7 @@ const Formulario = () => {
           value={inputDoctor}
           disabled={doctoresDisabled}
           onChange={(e) => setInputDoctor(e.target.value)}
+          required
         >
           <option value="">Selecciona un doctor</option>
           {doctores.map((doctor) => (
@@ -118,18 +147,19 @@ const Formulario = () => {
           id="fecha"
           value={inputFecha}
           onChange={(e) => cambiarInputFecha(e.target.value)}
+          required
         />
       </div>
 
       <div>
-                <label htmlFor="motivo">Motivo de la visita</label>
-                <textarea
-                    id="motivo"
-                    value={inputMotivo}
-                    onChange={(e) => cambiarInputMotivo(e.target.value)}
-                    required
-                ></textarea>
-            </div>
+          <label htmlFor="motivo">Motivo de la visita</label>
+          <textarea
+              id="motivo"
+              value={inputMotivo}
+              onChange={(e) => cambiarInputMotivo(e.target.value)}
+              required
+          ></textarea>
+        </div>
 
       <button type="submit">Solicitar Hora Médica</button>
     </form>
@@ -141,7 +171,7 @@ const Confirmacion = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { nombre, fecha, especialidad, doctor} = location.state || {};
+  const { nombre, fecha, especialidad, doctor, motivo} = location.state || {};
 
   const handleConfirmar = async () => {
     try {
@@ -183,6 +213,7 @@ const Confirmacion = () => {
       <p><strong>Fecha:</strong> {fecha}</p>
       <p><strong>Especialidad:</strong> {especialidad}</p>
       <p><strong>Doctor:</strong> {doctor}</p>
+      <p><strong>Motivo:</strong> {motivo}</p>
       <button onClick={handleConfirmar}>Confirmar y Enviar</button>
       <button onClick={handleCancelar} style={{ marginLeft: '10px' }}>Cancelar Cita</button>
     </div>
