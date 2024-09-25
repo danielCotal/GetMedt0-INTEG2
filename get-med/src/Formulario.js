@@ -10,6 +10,8 @@ const Formulario = () => {
   const [doctores, setDoctores] = useState([]);
   const [inputDoctor, setInputDoctor] = useState('');
   const [doctoresDisabled, setDoctoresDisabled] = useState(true);
+  const [inputMotivo, cambiarInputMotivo] = useState('');
+
 
   const navigate = useNavigate(); // Hook para navegar a otra página
 
@@ -43,6 +45,13 @@ const Formulario = () => {
   // Manejo del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validación de campos obligatorios
+    if (!inputNombre || !inputFecha || !inputEspecialidad || !inputDoctor || !inputMotivo) {
+      alert('Por favor, completa todos los campos.');
+      return;
+  }
+
     // Redirigir a la página de confirmación con los datos del formulario
     navigate('/confirmacion', {
       state: {
@@ -111,6 +120,16 @@ const Formulario = () => {
           onChange={(e) => cambiarInputFecha(e.target.value)}
         />
       </div>
+
+      <div>
+                <label htmlFor="motivo">Motivo de la visita</label>
+                <textarea
+                    id="motivo"
+                    value={inputMotivo}
+                    onChange={(e) => cambiarInputMotivo(e.target.value)}
+                    required
+                ></textarea>
+            </div>
 
       <button type="submit">Solicitar Hora Médica</button>
     </form>
