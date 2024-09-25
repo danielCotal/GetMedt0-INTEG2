@@ -1,6 +1,6 @@
 // src/pages/UsersPage.js
 import React from 'react';
-import './Usuarios.css'; 
+import '../styles//Usuarios.css'; 
 
 function Usuarios() {
   return (

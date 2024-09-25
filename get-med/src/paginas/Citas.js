@@ -1,5 +1,5 @@
 import React from 'react';
-import './Citas.css'; 
+import '../styles/Citas.css'; 
 
 function Citas() {
   return (
