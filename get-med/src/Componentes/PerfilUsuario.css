@@ -1,0 +1,52 @@
+.perfil-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    color: #333;
+  }
+  
+  .perfil-header {
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logout-btn {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background-color: white;
+    color: #007bff;
+  }
+  
+  .perfil-main {
+    flex: 1;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .perfil-info {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .perfil-footer {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+  }

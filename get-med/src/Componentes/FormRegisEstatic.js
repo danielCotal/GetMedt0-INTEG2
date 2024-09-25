@@ -40,7 +40,7 @@ function FormRegistro() {
       <div>
         <label htmlFor="Contraseña">Contraseña:</label>
         <input 
-          type="Contraseña" 
+          type="password" 
           id="Contraseña" 
           name="Contraseña" 
           value={formValues.Contraseña} 
@@ -49,7 +49,7 @@ function FormRegistro() {
           plaaceholder="Cree su contraseña"
         />
       </div>
-      <button type="submit">Registrarse</button>
+      <button className="btn-uno">Registrarse</button>
     </form>
   );
 };

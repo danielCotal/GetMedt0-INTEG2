@@ -1,0 +1,29 @@
+.btn-uno {
+    background-color: #0f2ba8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+.btn-uno:hover {
+    background-color: #243bbde5; 
+}
+
+.btn-eliminacion {
+    background-color: #a11207;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+.btn-eliminacion:hover {
+    background-color: #d32f2f; 
+}

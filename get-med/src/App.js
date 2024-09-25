@@ -1,22 +1,35 @@
 import React from 'react';
 import { useState } from 'react'; 
-import Calendar from 'react-calendar';
+import Calendario from './Componentes/Calendario.js';
 import 'react-calendar/dist/Calendar.css';
-import './Componentes/Calendario.css';
-import logo from './logo.svg';
 import './App.css';
+import './Componentes/Botones.css';
 import FormRegistro from './Componentes/FormRegisEstatic.js';
-import Usuarios from './Usuarios.js';
-import EditarUsuario from './UsuarioEdicion.js'; 
+import Usuarios from './Componentes/Usuarios.js';
+import EditarUsuario from './Componentes/UsuarioEdicion.js'; 
+import PerfilUsuario from './Componentes/PerfilUsuario.js';
 
 function App() {
-  const [date, setDate]= useState(new Date());
-  const handleDateChange= (newDate) => {
-    setDate(newDate);
-    console.log('Fecha escogida:', newDate);
-  };
+  const [date, setDate] = useState(null);  // Para almacenar la fecha seleccionada
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);  // Controla si estás editando
+  const [currentView, setCurrentView] = useState('home'); // Estado para controlar la vista actual
+
+  // Función que recibe la fecha seleccionada del componente Calendario
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
+    console.log('Fecha seleccionada:', newDate);
+  };
+
+  // Función cambiar a vista del perfil del usuario
+  const goToProfile = () => {
+    setCurrentView('perfil');
+  };
+
+  // Función volver a vista principal
+  const goBack = () => {
+    setCurrentView('home');
+  };
 
   // Función para seleccionar un usuario para editar
   const handleEditUser = (id) => {
@@ -36,10 +49,10 @@ function App() {
 
   return (
     <div className="App">
-        <h1>Libreria de calendario adecuada "React Calendar"</h1>
-        <Calendar onChange={handleDateChange} value={date}/>
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Eliminación de Usuarios</h1>
+        <h1>Libreria de calendario adecuada "React Datepicker"</h1>
+        {/* Componente Calendario para selección de fecha y hora */}
+        <Calendario onDateChange={handleDateChange} />
+        <h1>Eliminación y Edicion de Usuarios</h1>
         <Usuarios onSelectUser={setSelectedUserId} onEditUser={handleEditUser} />
         {/* Mostrar el formulario de edición si se está editando */}
         {isEditing && (
@@ -51,17 +64,18 @@ function App() {
         )}
         <h1>Registro de Usuarios</h1>
         <FormRegistro />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Tipos de botones segun mockup</h1>
+        <button class="btn-uno">Boton 1</button>
+        <button class="btn-eliminacion">Boton 2</button>
+        {currentView === 'home' && (
+          <div>
+            <h1>Perfil prototipo</h1>
+            <button onClick={goToProfile} className="btn-uno">
+              Ver Perfil
+            </button>
+          </div>
+        )}
+        {currentView === 'perfil' && <PerfilUsuario onBack={goBack} />}
     </div>
   );
 }
