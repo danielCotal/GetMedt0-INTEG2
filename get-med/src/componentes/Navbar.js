@@ -1,7 +1,7 @@
 // src/components/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Navbar.css'; // Cambia la ruta para apuntar a la carpeta styles
+import '../styles/Navbar.css'; 
 
 function Navbar() {
   return (
@@ -16,3 +16,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

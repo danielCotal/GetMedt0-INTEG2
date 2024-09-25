@@ -4,7 +4,7 @@ import Inicio from './paginas/Inicio';
 import Usuarios from './paginas/Usuarios';
 import Citas from './paginas/Citas';
 import Navbar from './componentes/Navbar';
-import './styles/App.css'; // Asegúrate de que esté correcto
+import './styles/App.css'; 
 
 function App() {
   return (
@@ -20,5 +20,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

@@ -1,11 +1,12 @@
 import React from 'react';
+import './Citas.css'; 
 
-function CitasP() {
+function Citas() {
   return (
-    <div>
-      <h1>Pagina de citas</h1>
+    <div className="pagina-citas">
+      <h1>Creacion de cita</h1>
     </div>
   );
 }
 
-export default CitasP;
+export default Citas;
