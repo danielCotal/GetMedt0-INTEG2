@@ -8,7 +8,11 @@ function Reservas({ userId }) {
 
   useEffect(() => {
     setLoading(true); // Iniciar el estado de carga
+<<<<<<< HEAD:mi-aplicacion/src/Reservas.js
     axios.get(`http://localhost:3001/api/usuario/${userId}/reservas`)
+=======
+    axios.get(`http://localhost:3001/usuario/${userId}/reservas`)
+>>>>>>> origin/Ricardo:get-med/src/Reservas.js
       .then(response => {
         setReservas(response.data);
         setLoading(false);  // Terminar el estado de carga

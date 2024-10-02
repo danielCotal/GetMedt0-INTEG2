@@ -5,7 +5,11 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
+<<<<<<< HEAD:mi-aplicacion/src/conex.js
   database: 'pagina'
+=======
+  database: 'getmed'
+>>>>>>> origin/Ricardo:get-med/src/conex.js
 });
 
 // Conectar a MySQL
