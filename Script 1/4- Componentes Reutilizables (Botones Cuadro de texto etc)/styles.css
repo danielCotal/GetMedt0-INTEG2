@@ -1,0 +1,167 @@
+/* Estilo para Botones estándar (Botón Claro) */
+.button1 {
+  background-color: #4CAF50; /* Verde Claro */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button1:hover {
+  background-color: #45a049; /* Verde más oscuro */
+  transform: scale(1.1);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para Botones más oscuros (Botón Acciones) */
+.button2 {
+  background-color: #215924; /* Verde Oscuro */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button2:hover {
+  background-color: #1B5E20; /* Verde aún más oscuro */
+  transform: scale(1.1);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para Cuadros de Texto */
+.text-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.text-input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 10px #4CAF50;
+}
+
+/* Estilo para Cuadros (divs) */
+.box {
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+/* Estilo para elementos select */
+.custom-select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.custom-select:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 10px #4CAF50;
+}
+
+/* Estilo para opciones dentro del select */
+.custom-select option {
+  padding: 10px;
+  background-color: white;
+  color: #333;
+}
+
+/* Estilo para los enlaces de navegación */
+.header {
+  background-color: #A5D6A7; /* Verde claro */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  display: flex;
+  gap: 20px;
+}
+
+.menu {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.menu:hover {
+  color: #4CAF50;
+  text-shadow: 0 0 10px #4CAF50;
+  cursor: pointer;
+}
+
+/* Estilo para la información de usuario */
+.user-info {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.user-info span {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilos adicionales para la página */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+}
