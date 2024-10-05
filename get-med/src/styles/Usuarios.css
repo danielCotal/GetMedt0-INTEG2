@@ -1,0 +1,17 @@
+.pagina-usuarios {
+    padding: 20px;
+  }
+  
+  .pagina-usuarios h1 {
+    font-size: 2rem;
+    color: #000000;
+    text-align: center;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .pagina-usuarios h1 {
+      font-size: 1.5rem;
+    }
+  }
+  
