@@ -1,0 +1,80 @@
+/* src/styles/Login.css */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 30px;
+    color: #2d3436;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #dfe6e9;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .login-form input:focus {
+    border-color: #74b9ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(116, 185, 255, 0.5);
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    width: 48%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-container button:first-child {
+    background-color: #0984e3;
+    color: white;
+  }
+  
+  .button-container button:first-child:hover {
+    background-color: #74b9ff;
+  }
+  
+  .button-container button:last-child {
+    background-color: #6c5ce7;
+    color: white;
+  }
+  
+  .button-container button:last-child:hover {
+    background-color: #a29bfe;
+  }
+  

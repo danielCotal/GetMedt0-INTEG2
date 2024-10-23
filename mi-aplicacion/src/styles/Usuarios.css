@@ -1,0 +1,108 @@
+.pagina-usuarios {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  background-color: #f0f0f0; /* Fondo claro */
+}
+
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.6); /* Fondo transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Sombra para mayor visibilidad */
+}
+
+.reserva-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.6); /* Fondo transparente */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Sombra para mayor visibilidad */
+}
+
+.usuario-reservas > ul {
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  width: 92%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.usuario-info ul {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding por defecto */
+  margin: 0; /* Elimina el margen por defecto */
+}
+
+/* Asegúrate de que el contenedor de cada cita tenga estos estilos */
+.reserva-cuadro {
+  border: 1px solid #ccc; /* Borde del cuadro */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #f9f9f9; /* Color de fondo */
+  padding: 20px;
+  margin: 0; /* Elimina margen adicional */
+  width: 90%; /* Auto para que el ancho se ajuste al contenido */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.user-icon-container {
+  background-color: rgba(255, 255, 255, 0.6); /* Fondo transparente para el ícono */
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar el ícono */
+  margin-right: 30px; /* Espacio entre la imagen y los detalles */
+}
+
+.user-icon {
+  width: 150px;
+  height: 150px;
+}
+
+.usuario-detalles {
+  font-size: 24px; /* Tamaño de fuente más grande */
+  color: #333; /* Color del texto */
+}
+
+
+.usuario-detalles p {
+  margin: 5px 0;
+}
+
+.usuario-detalles p {
+  margin: 10px 0; /* Espacio entre los párrafos */
+}
+
+.editar-btn {
+  background-color: #27cf97; /* Color verde */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.editar-btn:hover {
+  background-color: #27cf97; /* Un verde más oscuro al pasar el ratón */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .pagina-usuarios h1 {
+    font-size: 1.5rem;
+  }
+}
+  

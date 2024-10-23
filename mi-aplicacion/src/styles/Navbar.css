@@ -1,0 +1,51 @@
+/* Estilos generales para la navegación */
+.navegacion {
+  background-color: #27cf97;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.navegacion ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navegacion ul li {
+  margin: 0 15px;
+}
+
+.navegacion ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  transition: color 0.3s ease;
+}
+
+.navegacion ul li a:hover {
+  color: #4c66af; /* Color al pasar el mouse */
+}
+
+/* Responsividad: para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navegacion {
+    flex-direction: column;
+  }
+
+  .navegacion ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navegacion ul li {
+    margin: 10px 0;
+  }
+
+
+}
