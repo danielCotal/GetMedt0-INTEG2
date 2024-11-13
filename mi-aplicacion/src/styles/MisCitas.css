@@ -1,0 +1,97 @@
+/* Contenedor principal */
+.citas-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-family: Arial, sans-serif;
+    animation: fadeIn 0.8s ease-in;
+  }
+  
+  .citas-container h2 {
+    text-align: center;
+    font-size: 1.8em;
+    color: #27cf97;
+    margin-bottom: 20px;
+  }
+  
+  /* Lista de citas */
+  .citas-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cita-card {
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .cita-card:hover {
+    background-color: #f2f7f5;
+    transform: scale(1.02);
+  }
+  
+  .cita-info p {
+    margin: 5px 0;
+  }
+  
+  .cita-info strong {
+    color: #555;
+  }
+  
+  /* Botón de cancelar */
+  .cancelar-btn {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: end;
+  }
+  
+  .cancelar-btn:hover {
+    background-color: #e05858;
+  }
+  
+  .no-citas, .loading, .error {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @media (max-width: 600px) {
+    .citas-container {
+      padding: 15px;
+    }
+  
+    .cita-card {
+      padding: 12px;
+    }
+  
+    .cancelar-btn {
+      padding: 7px 12px;
+      font-size: 0.9em;
+    }
+  }
+  

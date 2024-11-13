@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Register.css';
-import { crearCuenta } from '../peticiones/crearCuenta'; // Importar la función de petición
+import { Container, Paper, TextField, Button, Typography, Box, Alert } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { crearCuenta } from '../peticiones/crearCuenta';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1e88e5',
+    },
+    secondary: {
+      main: '#8e24aa',
+    },
+  },
+});
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -9,53 +21,38 @@ function Register() {
     nombre: '',
     contraseña: '',
     email: '',
-    telefono: '', // Solo almacenamos los 8 dígitos del teléfono
+    telefono: '',
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Validaciones
   const validateForm = () => {
     const { rut, nombre, contraseña, email, telefono } = formData;
-
-    // Expresión regular para validar el RUT chileno
     const rutRegex = /^[0-9]+-[0-9kK]{1}$/;
-    // Expresión regular para validar el email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // Expresión regular para validar los 8 dígitos del teléfono
     const telefonoRegex = /^\d{8}$/;
 
-    // Validar RUT
     if (!rutRegex.test(rut)) {
       setError('RUT inválido. Debe tener el formato 12345678-9');
       return false;
     }
-
-    // Validar nombre
     if (nombre.length < 2) {
       setError('El nombre debe tener al menos 2 caracteres.');
       return false;
     }
-
-    // Validar contraseña
     if (contraseña.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres.');
       return false;
     }
-
-    // Validar correo electrónico
     if (!emailRegex.test(email)) {
       setError('Correo electrónico inválido.');
       return false;
     }
-
-    // Validar teléfono (solo los 8 dígitos)
     if (!telefonoRegex.test(telefono)) {
       setError('El teléfono debe tener exactamente 8 dígitos.');
       return false;
     }
 
-    // Si todas las validaciones pasan
     setError('');
     return true;
   };
@@ -65,13 +62,13 @@ function Register() {
   };
 
   const handleRegister = async () => {
-    if (!validateForm()) return; // No enviar el formulario si no pasa la validación
+    if (!validateForm()) return;
 
     try {
-      console.log('Datos enviados:', formData); // Debug para ver los datos antes del envío
+      console.log('Datos enviados:', formData);
       await crearCuenta({
         ...formData,
-        telefono: `+56 9${formData.telefono}`, // Agregar el prefijo antes de enviar
+        telefono: `+56 9${formData.telefono}`,
       });
       alert('Cuenta creada exitosamente');
       navigate('/login');
@@ -82,56 +79,84 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <h1>REGISTRARSE</h1>
-      <form className="register-form" onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          name="rut"
-          placeholder="RUT"
-          value={formData.rut}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="contraseña"
-          placeholder="Contraseña"
-          value={formData.contraseña}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo Electrónico"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          name="telefono"
-          placeholder="Telefono, inserta los 8 numeros tras (+56 9 ...)"
-          maxLength="8" // Limita la entrada a 8 dígitos
-          value={formData.telefono}
-          onChange={handleChange}
-          required
-        />
-        {error && <p className="error">{error}</p>}
-        <button type="button" onClick={handleRegister}>
-          Crear Cuenta
-        </button>
-      </form>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container maxWidth="sm">
+        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+          <Paper elevation={10} sx={{ padding: 4, borderRadius: 2, width: '100%' }}>
+            <Typography variant="h4" color="primary" gutterBottom align="center">
+              REGISTRARSE
+            </Typography>
+            <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 2 }}>
+              <TextField
+                label="RUT"
+                type="text"
+                name="rut"
+                value={formData.rut}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                required
+              />
+              <TextField
+                label="Nombre"
+                type="text"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                required
+              />
+              <TextField
+                label="Contraseña"
+                type="password"
+                name="contraseña"
+                value={formData.contraseña}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                required
+              />
+              <TextField
+                label="Correo Electrónico"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                required
+              />
+              <TextField
+                label="Teléfono (8 dígitos)"
+                type="tel"
+                name="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                required
+                inputProps={{ maxLength: 8 }}
+              />
+              {error && (
+                <Alert severity="error" sx={{ mt: 2 }}>
+                  {error}
+                </Alert>
+              )}
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleRegister}
+                fullWidth
+                sx={{ mt: 3 }}
+              >
+                Crear Cuenta
+              </Button>
+            </Box>
+          </Paper>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 

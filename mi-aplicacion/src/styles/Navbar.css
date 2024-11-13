@@ -1,38 +1,57 @@
-/* Estilos generales para la navegación */
+/* Navbar.css */
 .navegacion {
   background-color: #27cf97;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 8px;
 }
-
 
 .navegacion ul {
   display: flex;
-  flex-direction: row;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
 .navegacion ul li {
-  margin: 0 15px;
+  margin: 0 20px;
 }
 
 .navegacion ul li a {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: #fff;
-  font-size: 1.5rem; 
-  font-weight: bold; 
+  font-size: 1.2rem;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .navegacion ul li a:hover {
-  color: #4c66af; /* Color al pasar el mouse */
+  color: #4c66af;
 }
 
-/* Responsividad: para pantallas pequeñas */
+/* Botón de cierre de sesión */
+.logout-button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* Responsividad */
 @media (max-width: 768px) {
   .navegacion {
     flex-direction: column;
@@ -46,6 +65,4 @@
   .navegacion ul li {
     margin: 10px 0;
   }
-
-
 }

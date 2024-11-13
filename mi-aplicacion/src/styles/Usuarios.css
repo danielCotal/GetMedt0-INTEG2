@@ -1,108 +1,142 @@
 .pagina-usuarios {
   display: flex;
-  justify-content: center;
-  align-items: start;
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
-  background-color: #f0f0f0; /* Fondo claro */
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f7f6;
+  min-height: 100vh;
+  color: #444;
 }
 
-.usuario-info {
+h1, h3 {
+  color: #27cf97;
+  font-weight: 600;
+}
+
+.usuario-info, .usuario-reservas, .reserva-cuadro {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.6); /* Fondo transparente */
+  gap: 15px;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Sombra para mayor visibilidad */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.reserva-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.6); /* Fondo transparente */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Sombra para mayor visibilidad */
+.usuario-info:hover, .usuario-reservas:hover, .reserva-cuadro:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
 }
 
-.usuario-reservas > ul {
-  list-style-type: none; 
-  padding: 0; 
-  margin: 0; 
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px 0;
-  width: 92%;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.usuario-info ul {
-  list-style-type: none; /* Elimina los puntos de la lista */
-  padding: 0; /* Elimina el padding por defecto */
-  margin: 0; /* Elimina el margen por defecto */
-}
-
-/* Asegúrate de que el contenedor de cada cita tenga estos estilos */
-.reserva-cuadro {
-  border: 1px solid #ccc; /* Borde del cuadro */
-  border-radius: 8px; /* Bordes redondeados */
-  background-color: #f9f9f9; /* Color de fondo */
-  padding: 20px;
-  margin: 0; /* Elimina margen adicional */
-  width: 90%; /* Auto para que el ancho se ajuste al contenido */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .user-icon-container {
-  background-color: rgba(255, 255, 255, 0.6); /* Fondo transparente para el ícono */
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar el ícono */
-  margin-right: 30px; /* Espacio entre la imagen y los detalles */
+  background-color: #e1f5ec;
+  padding: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .user-icon {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
 }
 
 .usuario-detalles {
-  font-size: 24px; /* Tamaño de fuente más grande */
-  color: #333; /* Color del texto */
-}
-
-
-.usuario-detalles p {
-  margin: 5px 0;
+  font-size: 18px;
+  color: #333;
 }
 
 .usuario-detalles p {
-  margin: 10px 0; /* Espacio entre los párrafos */
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
+
+.usuario-detalles p strong {
+  margin-right: 8px;
+  color: #27cf97;
 }
 
 .editar-btn {
-  background-color: #27cf97; /* Color verde */
+  background-color: #27cf97;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .editar-btn:hover {
-  background-color: #27cf97; /* Un verde más oscuro al pasar el ratón */
+  background-color: #1bb47a;
+  transform: translateY(-3px);
 }
 
-/* Responsividad */
+.reserva-cuadro {
+  border: 2px solid #e6e6e6;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-cuadro p {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.reserva-cuadro p strong {
+  margin-right: 8px;
+  color: #333;
+}
+
+.reserva-cuadro p::before {
+  content: '📅';
+  margin-right: 10px;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.usuario-reservas > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 92%;
+  max-width: 600px;
+}
+
 @media (max-width: 768px) {
-  .pagina-usuarios h1 {
-    font-size: 1.5rem;
+  .usuario-detalles p, .reserva-cuadro p {
+    font-size: 0.9rem;
+  }
+  .editar-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
-  

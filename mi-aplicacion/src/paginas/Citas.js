@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../Componentes/UserContext';
 import { agregarReserva } from '../peticiones/reservacion';
 import axios from 'axios';
+import '../styles/Citas.css'; // Archivo de estilos
 
 function Citas() {
   const { userId } = useContext(UserContext);
-  const navigate = useNavigate(); // Para redireccionar
+  const navigate = useNavigate();
   const [especialidades, setEspecialidades] = useState([]);
   const [selectedEspecialidad, setSelectedEspecialidad] = useState('');
   const [horarios, setHorarios] = useState([]);
   const [selectedHorario, setSelectedHorario] = useState('');
   const [mensaje, setMensaje] = useState('');
 
-  // Si no hay usuario autenticado, redirigimos al login
   useEffect(() => {
     if (!userId) {
       navigate('/login');
@@ -24,22 +24,17 @@ function Citas() {
     const fetchEspecialidades = async () => {
       try {
         const response = await axios.get('http://localhost:3001/api/especialidades');
-        // Normalizamos las especialidades eliminando las repetidas
         const especialidadesUnicas = Array.from(
           new Set(response.data.map(espe => espe.ID_Especialidad))
-        ).map(id => {
-          return response.data.find(espe => espe.ID_Especialidad === id);
-        });
+        ).map(id => response.data.find(espe => espe.ID_Especialidad === id));
         setEspecialidades(especialidadesUnicas);
       } catch (error) {
         console.error('Error obteniendo especialidades:', error);
       }
     };
-
     fetchEspecialidades();
   }, []);
 
-  // Obtener los horarios filtrados por especialidad
   useEffect(() => {
     if (selectedEspecialidad) {
       const fetchHorarios = async () => {
@@ -50,7 +45,6 @@ function Citas() {
           console.error('Error al obtener horarios:', error);
         }
       };
-
       fetchHorarios();
     }
   }, [selectedEspecialidad]);
@@ -71,10 +65,10 @@ function Citas() {
   };
 
   return (
-    <div>
+    <div className="citas-page">
       <h2>Agregar Reserva</h2>
-      <form onSubmit={manejarSubmit}>
-        <div>
+      <form onSubmit={manejarSubmit} className="form-reserva">
+        <div className="form-group">
           <label>Especialidad:</label>
           <select
             value={selectedEspecialidad}
@@ -89,7 +83,7 @@ function Citas() {
             ))}
           </select>
         </div>
-        <div>
+        <div className="form-group">
           <label>Horario:</label>
           <select
             value={selectedHorario}
@@ -104,17 +98,11 @@ function Citas() {
             ))}
           </select>
         </div>
-        <button type="submit">Crear Reserva</button>
+        <button type="submit" className="btn-reserva">Crear Reserva</button>
       </form>
-      {mensaje && <p>{mensaje}</p>}
+      {mensaje && <p className="mensaje-reserva">{mensaje}</p>}
     </div>
   );
 }
 
 export default Citas;
-
-
-
-
-
-

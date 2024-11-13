@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import '../styles/Inicio.css';
-import { UserContext } from '../Componentes/UserContext'; // Importar el UserContext
+import '../styles/MisCitas.css'; // Archivo de estilos exclusivo para MisCitas
+import { UserContext } from '../Componentes/UserContext';
 
 function MisCitas() {
-  const { userId } = useContext(UserContext); // Obtener el userId del contexto
+  const { userId } = useContext(UserContext);
   const [citas, setCitas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (userId) { // Solo hace la petición si el userId existe
+    if (userId) {
       setLoading(true);
       axios.get(`http://localhost:3001/api/usuario/${userId}/reservas`)
         .then(response => {
@@ -27,7 +27,7 @@ function MisCitas() {
 
   const cancelarCita = (idReserva) => {
     axios.post(`http://localhost:3001/api/reservas/${idReserva}/cancelar`)
-      .then(response => {
+      .then(() => {
         setCitas(citas.map(cita =>
           cita.ID_Reserva === idReserva ? { ...cita, Cancelacion: true } : cita
         ));
@@ -38,27 +38,29 @@ function MisCitas() {
   };
 
   if (loading) {
-    return <p>Cargando citas...</p>;
+    return <p className="loading">Cargando citas...</p>;
   }
 
   if (error) {
-    return <p>Error al cargar las citas. Intenta nuevamente.</p>;
+    return <p className="error">Error al cargar las citas. Intenta nuevamente.</p>;
   }
 
   return (
-    <div>
+    <div className="citas-container">
       <h2>Mis Citas</h2>
-      <ul>
+      <ul className="citas-list">
         {citas.length === 0 ? (
-          <p>No tienes citas pendientes.</p>
+          <p className="no-citas">No tienes citas pendientes.</p>
         ) : (
           citas.map(cita => (
-            <li key={cita.ID_Reserva}>
-              <p>Fecha: {cita.FechaCreacion}</p>
-              <p>Horario: {cita.ID_Horario}</p>
-              <p>Cancelada: {cita.Cancelacion ? 'Sí' : 'No'}</p>
+            <li key={cita.ID_Reserva} className="cita-card">
+              <div className="cita-info">
+                <p><strong>Fecha:</strong> {cita.FechaCreacion}</p>
+                <p><strong>Horario:</strong> {cita.ID_Horario}</p>
+                <p><strong>Cancelada:</strong> {cita.Cancelacion ? 'Sí' : 'No'}</p>
+              </div>
               {!cita.Cancelacion && (
-                <button onClick={() => cancelarCita(cita.ID_Reserva)}>
+                <button className="cancelar-btn" onClick={() => cancelarCita(cita.ID_Reserva)}>
                   Cancelar Cita
                 </button>
               )}
@@ -71,4 +73,3 @@ function MisCitas() {
 }
 
 export default MisCitas;
-
