@@ -19,12 +19,13 @@ const Chatbot = () => {
   const handleUserInput = (event) => {
     if (event.key === 'Enter' && userInput.trim() !== '') {
       const userMessage = userInput.trim();
-      const reply = responses[userMessage] || 'Lo siento, no entiendo esa pregunta. ¿Podrías reformularla?';
+      const response = responses[userMessage] || responses.default;
+      const replyText = response.text; // Accede solo a la propiedad `text`
 
       setMessages((prev) => [
         ...prev,
         { sender: 'user', text: userMessage },
-        { sender: 'bot', text: reply }
+        { sender: 'bot', text: replyText }
       ]);
 
       setUserInput(''); // Limpiar el campo de entrada después de enviar el mensaje
