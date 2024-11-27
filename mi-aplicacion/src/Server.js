@@ -226,7 +226,6 @@ app.post('/api/reservas/:id/cancelar', (req, res) => {
   });
 });
 
-// Ruta para obtener los horarios filtrados por especialidad
 app.get('/api/horarios', (req, res) => {
   const { ID_Especialidad } = req.query;
 
@@ -236,7 +235,12 @@ app.get('/api/horarios', (req, res) => {
 
   // Consulta para obtener los horarios relacionados con la especialidad seleccionada
   const query = `
-    SELECT h.*
+    SELECT 
+      h.ID_Horario, 
+      h.FechaHora, 
+      m.Nom_medic, 
+      m.Apelli_medic, 
+      e.Nom_espe 
     FROM horario h
     JOIN medico m ON h.ID_Medic = m.ID_Medic
     JOIN especialidad e ON m.ID_Medic = e.ID_Medic
@@ -248,6 +252,12 @@ app.get('/api/horarios', (req, res) => {
       console.error('Error obteniendo horarios:', err);
       return res.status(500).send('Error obteniendo horarios');
     }
+
+    // Validar si no hay resultados
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'No se encontraron horarios para la especialidad seleccionada' });
+    }
+
     res.status(200).json(results);
   });
 });

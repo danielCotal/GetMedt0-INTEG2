@@ -1,20 +1,149 @@
-.pagina-inicio {
-  padding: 20px;
+/* General */
+.inicio-container {
+  padding: 40px 20px;
 }
 
-.pagina-inicio h1 {
+/* Hero Section */
+.inicio-hero {
+  background: linear-gradient(90deg, #e3f2fd 30%, #bbdefb 90%);
+  border-radius: 16px;
+  padding: 60px 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.inicio-title {
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #1976d2;
+  font-size: 2.5rem;
+}
+
+.inicio-subtitle {
+  margin-bottom: 24px;
+  color: #5f6368;
+  font-size: 1.2rem;
+}
+
+.inicio-button {
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 32px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  text-transform: none;
+}
+
+/* Section Title */
+.inicio-section-title {
+  margin-top: 40px;
+  margin-bottom: 24px;
+  font-weight: bold;
+  text-align: center;
   font-size: 2rem;
-  color: #4CAF50;
+}
+
+/* Slider */
+.inicio-slide {
+  padding: 16px; /* Espaciado entre las tarjetas del slider */
+}
+
+.inicio-card {
+  border: 1px solid #e0e0e0; /* Bordes suaves */
+  max-width: 345px;
+  margin: auto;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.inicio-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.inicio-card-image {
+  object-fit: cover;
+  height: 250px;
+}
+
+.inicio-card-title {
+  font-weight: bold;
+  margin-top: 16px;
   text-align: center;
 }
 
-.pagina-inicio p {
-  text-align: justify;
+/* Slick Customization */
+.slick-prev:before,
+.slick-next:before {
+  color: #1976d2;
+  font-size: 20px;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-  .pagina-inicio h1 {
+.slick-dots li button:before {
+  color: #cfd8dc;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #1976d2;
+}
+
+/* Features */
+.inicio-grid {
+  margin-top: 40px;
+}
+
+.inicio-feature-box {
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.feature-success {
+  background-color: #f1f8e9;
+  color: #2e7d32;
+}
+
+.feature-primary {
+  background-color: #ede7f6;
+  color: #512da8;
+}
+
+.inicio-feature-title {
+  font-weight: bold;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 960px) {
+  .inicio-card {
+    max-width: 300px;
+  }
+
+  .inicio-card-title {
+    font-size: 1.2rem;
+  }
+
+  .inicio-feature-box {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .inicio-title {
+    font-size: 2rem;
+  }
+
+  .inicio-subtitle {
+    font-size: 1rem;
+  }
+
+  .inicio-section-title {
     font-size: 1.5rem;
   }
 }
+

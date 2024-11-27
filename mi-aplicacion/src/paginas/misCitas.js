@@ -1,7 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import '../styles/MisCitas.css'; // Archivo de estilos exclusivo para MisCitas
 import { UserContext } from '../Componentes/UserContext';
+import {
+  Container,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  Paper,
+  Chip,
+  Box,
+  CircularProgress,
+} from '@mui/material';
+import { format, isPast } from 'date-fns';
 
 function MisCitas() {
   const { userId } = useContext(UserContext);
@@ -12,12 +24,13 @@ function MisCitas() {
   useEffect(() => {
     if (userId) {
       setLoading(true);
-      axios.get(`http://localhost:3001/api/usuario/${userId}/reservas`)
-        .then(response => {
+      axios
+        .get(`http://localhost:3001/api/usuario/${userId}/reservas`)
+        .then((response) => {
           setCitas(response.data);
           setLoading(false);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error al obtener citas:', error);
           setError(error);
           setLoading(false);
@@ -26,49 +39,89 @@ function MisCitas() {
   }, [userId]);
 
   const cancelarCita = (idReserva) => {
-    axios.post(`http://localhost:3001/api/reservas/${idReserva}/cancelar`)
+    axios
+      .post(`http://localhost:3001/api/reservas/${idReserva}/cancelar`)
       .then(() => {
-        setCitas(citas.map(cita =>
-          cita.ID_Reserva === idReserva ? { ...cita, Cancelacion: true } : cita
-        ));
+        setCitas(
+          citas.map((cita) =>
+            cita.ID_Reserva === idReserva ? { ...cita, Cancelacion: true } : cita
+          )
+        );
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al cancelar la cita:', error);
       });
   };
 
   if (loading) {
-    return <p className="loading">Cargando citas...</p>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (error) {
-    return <p className="error">Error al cargar las citas. Intenta nuevamente.</p>;
+    return (
+      <Typography align="center" color="error">
+        Error al cargar las citas. Intenta nuevamente.
+      </Typography>
+    );
   }
 
   return (
-    <div className="citas-container">
-      <h2>Mis Citas</h2>
-      <ul className="citas-list">
+    <Container maxWidth="sm" sx={{ mt: 4, mb: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom color="primary">
+        Mis Citas
+      </Typography>
+      <Paper elevation={3} sx={{ p: 3 }}>
         {citas.length === 0 ? (
-          <p className="no-citas">No tienes citas pendientes.</p>
+          <Typography align="center" color="textSecondary">
+            No tienes citas pendientes.
+          </Typography>
         ) : (
-          citas.map(cita => (
-            <li key={cita.ID_Reserva} className="cita-card">
-              <div className="cita-info">
-                <p><strong>Fecha:</strong> {cita.FechaCreacion}</p>
-                <p><strong>Horario:</strong> {cita.ID_Horario}</p>
-                <p><strong>Cancelada:</strong> {cita.Cancelacion ? 'Sí' : 'No'}</p>
-              </div>
-              {!cita.Cancelacion && (
-                <button className="cancelar-btn" onClick={() => cancelarCita(cita.ID_Reserva)}>
-                  Cancelar Cita
-                </button>
-              )}
-            </li>
-          ))
+          <List>
+            {citas.map((cita) => {
+              const citaAtrasada = isPast(new Date(cita.FechaCreacion)) && !cita.Cancelacion;
+              return (
+                <ListItem
+                  key={cita.ID_Reserva}
+                  sx={{
+                    mb: 2,
+                    p: 2,
+                    backgroundColor: citaAtrasada ? '#fef2f2' : '#f5f5f5',
+                    borderRadius: '8px',
+                    border: citaAtrasada ? '1px solid #ff6b6b' : 'none',
+                  }}
+                >
+                  <Box flex="1">
+                    <ListItemText
+                      primary={`Horario: ${cita.ID_Horario}`}
+                      secondary={`Fecha: ${format(new Date(cita.FechaCreacion), 'dd/MM/yyyy HH:mm')}`}
+                    />
+                    {citaAtrasada && (
+                      <Chip label="Atrasada" color="error" sx={{ mt: 1 }} />
+                    )}
+                    {cita.Cancelacion && (
+                      <Chip label="Cancelada" color="warning" sx={{ mt: 1 }} />
+                    )}
+                  </Box>
+                  {!cita.Cancelacion && !citaAtrasada && (
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => cancelarCita(cita.ID_Reserva)}
+                    >
+                      Cancelar
+                    </Button>
+                  )}
+                </ListItem>
+              );
+            })}
+          </List>
         )}
-      </ul>
-    </div>
+      </Paper>
+    </Container>
   );
 }
 
